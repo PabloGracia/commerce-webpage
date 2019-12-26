@@ -2,7 +2,7 @@ import React from "react";
 
 import "./directory.styles.scss";
 
-import { MenuItem } from "../menu-item/menu-item.component";
+import MenuItem from "../menu-item/menu-item.component";
 
 interface IProps {}
 interface IState {
@@ -14,6 +14,7 @@ export interface IItem {
   imageUrl?: string;
   size?: string;
   id?: number;
+  linkUrl?: string;
 }
 
 export class Directory extends React.Component<IProps, IState> {
@@ -24,7 +25,8 @@ export class Directory extends React.Component<IProps, IState> {
         {
           title: "HATS",
           imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-          id: 1
+          id: 1,
+          linkUrl: "hats"
         },
         {
           title: "jackets",
@@ -55,8 +57,8 @@ export class Directory extends React.Component<IProps, IState> {
   render() {
     return (
       <div className="directory-menu">
-        {this.state.sections.map(({ title, imageUrl, size, id }) => (
-          <MenuItem key={id} title={title} size={size} imageUrl={imageUrl} />
+        {this.state.sections.map(({ id, ...otherSectionProps }) => (
+          <MenuItem key={id} {...otherSectionProps} />
         ))}
       </div>
     );
