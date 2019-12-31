@@ -14,7 +14,7 @@ interface IState {
 
 export interface IFormSignIn {
   name: string;
-  type: "email" | "password";
+  type: "email" | "password" | "text";
   value: string;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   required: boolean | undefined;

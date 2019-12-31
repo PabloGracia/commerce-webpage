@@ -7,9 +7,13 @@ import HomePage from "./pages/homepage/homepage.component";
 import { ShopPage } from "./pages/shop/shop.component";
 import { Header } from "./components/header/header.component";
 import { SignInAndSignUpPage } from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
-import { auth } from "./firebase/firebase.utils";
+import { auth, IUserData } from "./firebase/firebase.utils";
 
-class App extends React.Component<{}, { currentUser: firebase.User | null }> {
+import { createUserProfileDocument } from "./firebase/firebase.utils";
+
+export type TCurrentUser = { id: string } & IUserData;
+
+class App extends React.Component<{}, { currentUser: TCurrentUser | null }> {
   constructor(props: {}) {
     super(props);
 
@@ -21,10 +25,23 @@ class App extends React.Component<{}, { currentUser: firebase.User | null }> {
   unsubscribeFromAuth: any = null;
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      this.setState({ currentUser: user });
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
 
-      console.log(user);
+        (userRef as firebase.firestore.DocumentReference<
+          firebase.firestore.DocumentData
+        >).onSnapshot((snapShot) => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...(snapShot.data() as IUserData)
+            }
+          });
+        });
+      } else {
+        this.setState({ currentUser: userAuth });
+      }
     });
   }
 
