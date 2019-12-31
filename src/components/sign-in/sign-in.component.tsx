@@ -4,7 +4,7 @@ import "./sign-in.styles.scss";
 import { FormInput } from "../form-input/form-input.component";
 import { CustomButton } from "../custom-button/custom-button.component";
 
-import { signInWithGoogle } from "../../firebase/firebase.utils";
+import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
 
 interface IProps {}
 interface IState {
@@ -30,10 +30,20 @@ export class SignIn extends React.Component<IProps, IState> {
     };
   }
 
-  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    this.setState({ email: "", password: "" });
+    const { email, password } = this.state;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState({ email: "", password: "" });
+    } catch (error) {
+      if (error.code === "auth/wrong-password") {
+        alert("The password is invalid or the user does not have a password");
+      }
+      console.log(error);
+    }
   };
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
