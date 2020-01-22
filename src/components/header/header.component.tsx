@@ -5,12 +5,15 @@ import { connect } from "react-redux";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase.utils";
 import { TCurrentUser } from "../../App";
+import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
 import "./header.styles.scss";
 
-const Header: React.FC<{ currentUser: TCurrentUser | null }> = ({
-  currentUser
-}) => (
+const Header: React.FC<{
+  currentUser: TCurrentUser | null;
+  hidden: boolean;
+}> = ({ currentUser, hidden }) => (
   <div className="header">
     <Link className="logo-container" to="/">
       <Logo className="logo" />
@@ -31,12 +34,15 @@ const Header: React.FC<{ currentUser: TCurrentUser | null }> = ({
           SIGN IN
         </Link>
       )}
+      <CartIcon />
     </div>
+    {hidden ? null : <CartDropdown />}
   </div>
 );
 
 const mapStateToProps = (state: any) => ({
-  currentUser: state.user.currentUser
+  currentUser: state.user.currentUser,
+  hidden: state.cart.hidden
 });
 
 export default connect(mapStateToProps)(Header);
