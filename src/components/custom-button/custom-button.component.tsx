@@ -1,17 +1,21 @@
 import React from "react";
 
 import "./custom-button.styles.scss";
+import { CartActionTypes } from "../../redux/cart/cart.types";
 
 interface IProps {
   type?: "submit" | "button";
 }
 
 export const CustomButton: React.FC<IProps & {
-  onClick?: () => Promise<firebase.auth.UserCredential>;
+  onClick?: () => Promise<firebase.auth.UserCredential> | CartActionTypes;
   isGoogleSignIn?: boolean | undefined;
-}> = ({ children, isGoogleSignIn, ...rest }) => (
+  inverted?: boolean;
+}> = ({ children, isGoogleSignIn, inverted, ...rest }) => (
   <button
-    className={`${isGoogleSignIn ? "google-sign-in" : ""} custom-button`}
+    className={`${inverted ? "inverted" : ""} ${
+      isGoogleSignIn ? "google-sign-in" : ""
+    } custom-button`}
     {...rest}
   >
     {children}
