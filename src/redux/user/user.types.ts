@@ -8,3 +8,7 @@ interface SetCurrentUserAction {
 }
 
 export type UserActionTypes = SetCurrentUserAction;
+
+export type UserStateType = {
+  currentUser: TCurrentUser | null;
+};

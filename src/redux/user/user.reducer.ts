@@ -1,10 +1,13 @@
-import { SET_CURRENT_USER, UserActionTypes } from "./user.types";
+import { SET_CURRENT_USER, UserActionTypes, UserStateType } from "./user.types";
 
 const INITIAL_STATE = {
   currentUser: null
 };
 
-const userReducer = (state = INITIAL_STATE, action: UserActionTypes) => {
+const userReducer = (
+  state: UserStateType = INITIAL_STATE,
+  action: UserActionTypes
+) => {
   switch (action.type) {
     case SET_CURRENT_USER:
       return {

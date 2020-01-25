@@ -13,3 +13,8 @@ interface AddItemsAction {
 }
 
 export type CartActionTypes = ToggleCartHiddenAction | AddItemsAction;
+
+export type CartStateType = {
+  hidden: boolean;
+  cartItems: IShopItem[];
+};
