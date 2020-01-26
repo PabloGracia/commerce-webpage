@@ -7,6 +7,8 @@ import { auth } from "../../firebase/firebase.utils";
 import { TCurrentUser } from "../../App";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+import { selectCartHidden } from "../../redux/cart/cart.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selector";
 
 import "./header.styles.scss";
 import { StateType } from "../../redux/root.types";
@@ -42,8 +44,8 @@ const Header: React.FC<{
 );
 
 const mapStateToProps = (state: StateType) => ({
-  currentUser: state.user.currentUser,
-  hidden: state.cart.hidden
+  currentUser: selectCurrentUser(state),
+  hidden: selectCartHidden(state)
 });
 
 export default connect(mapStateToProps)(Header);

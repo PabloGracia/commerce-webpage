@@ -8,7 +8,10 @@ interface IProps {
 }
 
 export const CustomButton: React.FC<IProps & {
-  onClick?: () => Promise<firebase.auth.UserCredential> | CartActionTypes;
+  onClick?: () =>
+    | Promise<firebase.auth.UserCredential>
+    | CartActionTypes
+    | void;
   isGoogleSignIn?: boolean | undefined;
   inverted?: boolean;
 }> = ({ children, isGoogleSignIn, inverted, ...rest }) => (

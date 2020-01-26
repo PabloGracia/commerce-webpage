@@ -12,6 +12,8 @@ import { auth, IUserData } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
 
 import { createUserProfileDocument } from "./firebase/firebase.utils";
+import { selectCurrentUser } from "./redux/user/user.selector";
+import CheckoutPage from "./pages/checkout/checkout.component";
 
 export type TCurrentUser = { id: string } & IUserData;
 
@@ -54,6 +56,7 @@ class App extends React.Component<
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckoutPage} />
           <Route
             exact
             path="/signin"
@@ -72,7 +75,7 @@ class App extends React.Component<
 }
 
 const mapStateToProps = (state: any) => ({
-  currentUser: state.user.currentUser
+  currentUser: selectCurrentUser(state)
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
