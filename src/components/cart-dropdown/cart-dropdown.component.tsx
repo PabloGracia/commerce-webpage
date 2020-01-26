@@ -1,12 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import "./cart-dropdown.styles.scss";
+
 import { CustomButton } from "../custom-button/custom-button.component";
 
-import "./cart-dropdown.styles.scss";
 import CartItem from "../cart-item/cart-item.component";
 import { IShopItem } from "../../pages/shop/shop.data";
 import { StateType } from "../../redux/root.types";
+import { selectCartItems } from "../../redux/cart/cart.selectors";
 
 const CartDropdown: React.FC<{ cartItems: IShopItem[] }> = ({ cartItems }) => (
   <div className="cart-dropdown">
@@ -19,15 +21,7 @@ const CartDropdown: React.FC<{ cartItems: IShopItem[] }> = ({ cartItems }) => (
 );
 
 const mapStateToProps = (state: StateType): { cartItems: IShopItem[] } => ({
-  cartItems: state.cart.cartItems
+  cartItems: selectCartItems(state)
 });
 
 export default connect(mapStateToProps)(CartDropdown);
-
-// state.cart.cartItems
-
-/*
-const mapStateToProps = (state: StateType): {cartItems: IShopItem[]} => ({
-  state.cart.cartItems
-})
-*/
