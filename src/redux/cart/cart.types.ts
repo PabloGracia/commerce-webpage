@@ -1,4 +1,4 @@
-import { IShopItem } from "../../pages/shop/shop.data";
+import { IShopItem } from "../shop/shop.types";
 
 export const TOGGLE_CART_HIDDEN = "TOGGLE_CART_HIDDEN";
 export const ADD_ITEM = "ADD_ITEM";

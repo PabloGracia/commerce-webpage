@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import "./collection-item.styles.scss";
 
-import { IShopItem } from "../../pages/shop/shop.data";
+import { IShopItem } from "../../redux/shop/shop.types";
 import { CustomButton } from "../custom-button/custom-button.component";
 import { addItem } from "../../redux/cart/cart.actions";
 

@@ -1,8 +1,12 @@
 import React from "react";
+import { connect, ConnectedProps } from "react-redux";
 
 import "./directory.styles.scss";
 
 import MenuItem from "../menu-item/menu-item.component";
+import { StateType } from "../../redux/root.types";
+import { DirectoryStateType } from "../../redux/directory/directory.types";
+import { selectDirectorySections } from "../../redux/directory/directory.selectors";
 
 interface IProps {}
 interface IState {
@@ -17,50 +21,21 @@ export interface IItem {
   linkUrl?: string;
 }
 
-export class Directory extends React.Component<IProps, IState> {
-  constructor(props: IProps) {
-    super(props);
-    this.state = {
-      sections: [
-        {
-          title: "HATS",
-          imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-          id: 1,
-          linkUrl: "hats"
-        },
-        {
-          title: "jackets",
-          imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
-          id: 2
-        },
-        {
-          title: "SNEAKERS",
-          imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
-          id: 3
-        },
-        {
-          title: "WOMEN",
-          imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
-          size: "large",
-          id: 4
-        },
-        {
-          title: "MEN",
-          imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
-          size: "large",
-          id: 5
-        }
-      ]
-    };
-  }
+const Directory: React.FC<PropsFromRedux> = ({ sections }) => {
+  return (
+    <div className="directory-menu">
+      {sections.map(({ id, ...otherSectionProps }) => (
+        <MenuItem key={id} {...otherSectionProps} />
+      ))}
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div className="directory-menu">
-        {this.state.sections.map(({ id, ...otherSectionProps }) => (
-          <MenuItem key={id} {...otherSectionProps} />
-        ))}
-      </div>
-    );
-  }
-}
+const mapStateToProps = (state: StateType): DirectoryStateType => ({
+  sections: selectDirectorySections(state)
+});
+
+const connector = connect(mapStateToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export default connector(Directory);

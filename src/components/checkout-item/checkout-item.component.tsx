@@ -2,7 +2,7 @@ import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 
 import "./checkout-item.styles.scss";
-import { IShopItem } from "../../pages/shop/shop.data";
+import { IShopItem } from "../../redux/shop/shop.types";
 import { clearItem, addItem, removeItem } from "../../redux/cart/cart.actions";
 
 const CheckoutItem: React.FC<{ cartItem: IShopItem } & PropsFromRedux> = ({

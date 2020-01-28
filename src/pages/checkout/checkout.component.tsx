@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 
 import {
   selectCartItems,
@@ -8,13 +8,10 @@ import {
 
 import "./checkout.styles.scss";
 import { StateType } from "../../redux/root.types";
-import { IShopItem } from "../shop/shop.data";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+import { CartStateType } from "../../redux/cart/cart.types";
 
-const CheckoutPage: React.FC<{ cartItems: IShopItem[]; total: number }> = ({
-  cartItems,
-  total
-}) => (
+const CheckoutPage: React.FC<PropsFromRedux> = ({ cartItems, total }) => (
   <div className="checkout-page">
     <div className="checkout-header">
       <div className="header-block">
@@ -42,9 +39,14 @@ const CheckoutPage: React.FC<{ cartItems: IShopItem[]; total: number }> = ({
   </div>
 );
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (
+  state: StateType
+): Pick<CartStateType, "cartItems"> & { total: number } => ({
   cartItems: selectCartItems(state),
   total: selectCartTotal(state)
 });
+
+const connector = connect(mapStateToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
 export default connect(mapStateToProps, null)(CheckoutPage);

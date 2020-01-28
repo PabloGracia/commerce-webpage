@@ -7,14 +7,13 @@ import "./cart-dropdown.styles.scss";
 import { CustomButton } from "../custom-button/custom-button.component";
 
 import CartItem from "../cart-item/cart-item.component";
-import { IShopItem } from "../../pages/shop/shop.data";
 import { StateType } from "../../redux/root.types";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
 import { toggleCartHidden } from "../../redux/cart/cart.actions";
+import { CartStateType } from "../../redux/cart/cart.types";
 
-const CartDropdown: React.FC<{
-  cartItems: IShopItem[];
-} & RouteComponentProps &
+const CartDropdown: React.FC<Pick<CartStateType, "cartItems"> &
+  RouteComponentProps &
   PropsFromRedux> = ({ cartItems, history, dispatch }) => (
   <div className="cart-dropdown">
     <div className="cart-items" />
@@ -36,7 +35,9 @@ const CartDropdown: React.FC<{
   </div>
 );
 
-const mapStateToProps = (state: StateType): { cartItems: IShopItem[] } => ({
+const mapStateToProps = (
+  state: StateType
+): Pick<CartStateType, "cartItems"> => ({
   cartItems: selectCartItems(state)
 });
 

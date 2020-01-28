@@ -1,4 +1,4 @@
-import { IShopItem } from "../../pages/shop/shop.data";
+import { IShopItem } from "../shop/shop.types";
 
 export const addItemToCart = (
   cartItems: IShopItem[],
