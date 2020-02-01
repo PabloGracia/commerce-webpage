@@ -1,4 +1,4 @@
-export interface IShopItem {
+export interface ProductInterface {
   id: number;
   name: string;
   imageUrl: string;
@@ -6,15 +6,23 @@ export interface IShopItem {
   quantity?: number;
 }
 
-export interface IShopData {
+export interface CategoryInterface {
   id: number;
   title: string;
   routeName: string;
-  items: IShopItem[];
+  items: ProductInterface[];
+}
+
+export interface ShopDataInterface {
+  hats: CategoryInterface;
+  sneakers: CategoryInterface;
+  jackets: CategoryInterface;
+  mens: CategoryInterface;
+  womens: CategoryInterface;
 }
 
 export type ShopStateType = {
-  collections: IShopData[];
+  collections: ShopDataInterface;
 };
 
 interface EmptyAction {

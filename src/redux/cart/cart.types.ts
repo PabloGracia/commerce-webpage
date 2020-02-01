@@ -1,4 +1,4 @@
-import { IShopItem } from "../shop/shop.types";
+import { ProductInterface } from "../shop/shop.types";
 
 export const TOGGLE_CART_HIDDEN = "TOGGLE_CART_HIDDEN";
 export const ADD_ITEM = "ADD_ITEM";
@@ -11,17 +11,17 @@ interface ToggleCartHiddenAction {
 
 interface AddItemsAction {
   type: typeof ADD_ITEM;
-  payload: IShopItem;
+  payload: ProductInterface;
 }
 
 interface ClearItemFromCartAction {
   type: typeof CLEAR_ITEM_FROM_CART;
-  payload: IShopItem;
+  payload: ProductInterface;
 }
 
 interface RemoveItem {
   type: typeof REMOVE_ITEM;
-  payload: IShopItem;
+  payload: ProductInterface;
 }
 
 export type CartActionTypes =
@@ -32,5 +32,5 @@ export type CartActionTypes =
 
 export type CartStateType = {
   hidden: boolean;
-  cartItems: IShopItem[];
+  cartItems: ProductInterface[];
 };

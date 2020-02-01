@@ -2,9 +2,9 @@ import React from "react";
 
 import "./cart-item.styles.scss";
 
-import { IShopItem } from "../../redux/shop/shop.types";
+import { ProductInterface } from "../../redux/shop/shop.types";
 
-const CartItem: React.FC<{ item: IShopItem }> = ({
+const CartItem: React.FC<{ item: ProductInterface }> = ({
   item: { imageUrl, price, name, quantity }
 }) => (
   <div className="cart-item">

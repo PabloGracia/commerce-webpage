@@ -2,15 +2,12 @@ import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 
 import "./checkout-item.styles.scss";
-import { IShopItem } from "../../redux/shop/shop.types";
+import { ProductInterface } from "../../redux/shop/shop.types";
 import { clearItem, addItem, removeItem } from "../../redux/cart/cart.actions";
 
-const CheckoutItem: React.FC<{ cartItem: IShopItem } & PropsFromRedux> = ({
-  cartItem,
-  clearItem,
-  addItem,
-  removeItem
-}) => {
+const CheckoutItem: React.FC<{
+  cartItem: ProductInterface;
+} & PropsFromRedux> = ({ cartItem, clearItem, addItem, removeItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
   return (
     <div className="checkout-item">
@@ -36,9 +33,9 @@ const CheckoutItem: React.FC<{ cartItem: IShopItem } & PropsFromRedux> = ({
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  clearItem: (item: IShopItem) => dispatch(clearItem(item)),
-  addItem: (item: IShopItem) => dispatch(addItem(item)),
-  removeItem: (item: IShopItem) => dispatch(removeItem(item))
+  clearItem: (item: ProductInterface) => dispatch(clearItem(item)),
+  addItem: (item: ProductInterface) => dispatch(addItem(item)),
+  removeItem: (item: ProductInterface) => dispatch(removeItem(item))
 });
 
 const connector = connect(null, mapDispatchToProps);

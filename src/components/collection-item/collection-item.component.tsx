@@ -3,11 +3,13 @@ import { connect } from "react-redux";
 
 import "./collection-item.styles.scss";
 
-import { IShopItem } from "../../redux/shop/shop.types";
+import { ProductInterface } from "../../redux/shop/shop.types";
 import { CustomButton } from "../custom-button/custom-button.component";
 import { addItem } from "../../redux/cart/cart.actions";
 
-const CollectionItem: React.FC<{ item: IShopItem; addItem: any }> = (props) => {
+const CollectionItem: React.FC<{ item: ProductInterface; addItem: any }> = (
+  props
+) => {
   const { imageUrl, name, price } = props.item;
   return (
     <div className="collection-item">
@@ -29,7 +31,7 @@ const CollectionItem: React.FC<{ item: IShopItem; addItem: any }> = (props) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  addItem: (item: IShopItem) => dispatch(addItem(item))
+  addItem: (item: ProductInterface) => dispatch(addItem(item))
 });
 
 export default connect(null, mapDispatchToProps)(CollectionItem);

@@ -2,11 +2,11 @@ import React from "react";
 
 import "./collection-preview.styles.scss";
 
-import { IShopData } from "../../redux/shop/shop.types";
+import { CategoryInterface } from "../../redux/shop/shop.types";
 import CollectionItem from "../collection-item/collection-item.component";
 
 export const CollectionPreview: React.FC<Pick<
-  IShopData,
+  CategoryInterface,
   "items" | "title"
 >> = ({ title, items }) => (
   <div className="collection-preview">
