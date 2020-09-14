@@ -2,7 +2,7 @@
 
 ---
 
-The production version of this app can be found [here](https://dashboard.heroku.com/apps/pgracia-ecommerce-portfolio/resources).
+The production version of this app can be found [here](https://pgracia-ecommerce-portfolio.herokuapp.com/).
 
 I started this project with the intention of learning more about React and its ecosystem, as well as Typescript. To have some guidance with the React bit, I have followed [this course](https://www.udemy.com/course/complete-react-developer-zero-to-mastery/) in Udemy to build the app. The course focuses on React on top of Javascript, so in my approach to building the app I have learned from the videos how to build the different bits, and following that I have implemented what I've learn in the course, but using Typescript. To learn how to embed Typescript I have been learning from various resources online.
 
